@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+import os
+import py_compile
+import sys
+
+pyfile = os.getenv("PYFILE")
+
+if pyfile is None:
+    sys.stderr.write("Error: PYFILE environment variable is not set.\n")
+    sys.exit(1)
+
+try:
+    print(f"Compiling {pyfile} ...")
+    py_compile.compile(pyfile, cfile=f"{pyfile}c")
+except Exception as error:
+    sys.stderr.write(f"Compilation failed: {error}\n")
+    sys.exit(1)
