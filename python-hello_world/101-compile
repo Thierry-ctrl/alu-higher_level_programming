@@ -8,7 +8,10 @@ fi
 
 # Compile the Python file
 echo "Compiling $PYFILE ..."
-python3 -m py_compile "$PYFILE"
+if ! python3 -m py_compile "$PYFILE"; then
+    echo "Compilation failed."
+    exit 1
+fi
 
 # Rename the compiled file to include 'c' suffix
 output_file="${PYFILE}c"
@@ -16,3 +19,6 @@ mv "__pycache__/${PYFILE%.py}.cpython-"*".pyc" "$output_file" 2>/dev/null
 
 # Clean up __pycache__ directory if empty
 rmdir __pycache__ 2>/dev/null
+
+# Successful execution
+exit 0
