@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """sends the post requst to url"""
 import sys
